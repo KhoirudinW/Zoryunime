@@ -4,9 +4,9 @@
     const model = ref("");
 </script>
 <template class="border">
-    <Navbar />
-    <div class="h-screen">
+    <Navbar class="text-white" />
+    <div>
         <router-view />
     </div>
-    <Footer />
+    <Footer class="text-white" />
 </template>

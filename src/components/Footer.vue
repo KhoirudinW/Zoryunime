@@ -1,5 +1,6 @@
 <template lang="">
-    <div class="bg-slate-400 h-44 p-5 text-center static bottom-0">
+    <div class="w-full h-1 bg-[#F96D00]"></div>
+    <div class="bg-[#393E46] h-44 p-5 text-center static bottom-0 text-white">
         <p>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse, qui.
         </p>

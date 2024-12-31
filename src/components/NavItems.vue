@@ -2,24 +2,26 @@
     const props = defineProps({ status: String });
 </script>
 <template lang="">
+
     <ul
-        class="absolute md:hidden left-0 top-20 bg-slate-400 p-2 w-full flex flex-col gap-3"
+        class="absolute md:hidden left-0 top-20 bg-[#393E46] text-white p-2 w-full flex flex-col gap-1"
     >
-        <li class="border-2 p-1">
+    <div class="w-full h-1 bg-[#F96D00] my-2"></div>
+        <li class="border-2 p-1 rounded-md transition-all duration-150 ease-in-out" :class="{ 'border-[#F96D00] text-[#F96D00]': $route.path === '/' }">
             <router-link to="/"
-                ><button class="text-left p-1 w-full">home</button></router-link
+                ><button class="text-left p-1 px-2 w-full font-bold">home</button></router-link
             >
         </li>
-        <li class="border-2 p-1">
+        <li class="border-2 p-1 rounded-md transition-all duration-150 ease-in-out" :class="{ 'border-[#F96D00] text-[#F96D00]': $route.path === '/kategori' }">
             <router-link to="/kategori"
-                ><button class="text-left p-1 w-full">
+                ><button class="text-left p-1 px-2 w-full font-bold">
                     kategori
                 </button></router-link
             >
         </li>
-        <li class="border-2 p-1">
+        <li class="border-2 p-1 rounded-md transition-all duration-150 ease-in-out" :class="{ 'border-[#F96D00] text-[#F96D00]': $route.path === '/list' }">
             <router-link to="/list"
-                ><button class="text-left p-1 w-full">List</button></router-link
+                ><button class="text-left p-1 px-2 w-full font-bold">List</button></router-link
             >
         </li>
         <li class="p-1">

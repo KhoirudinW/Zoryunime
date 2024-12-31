@@ -4,13 +4,13 @@
 
 <template>
     <div
-        class="w-72 bg-slate-400 flex flex-col justify-center items-center p-2 rounded-lg"
+        class="w-72 bg-[#393E46] border-2 border-[#F96D00] text-white flex flex-col justify-center items-center p-2 rounded-lg"
     >
         <h1 class="text-2xl font-bold text-white">{{ title }}</h1>
         <div>
             <div class="flex flex-col py-2 gap-2 px-3">
                 <div class="">
-                    <label for="name"> Username </label>
+                    <label for="name"> Username : </label>
                     <input
                         class="w-full border-2 border-black rounded-lg p-1"
                         type="text"
@@ -19,7 +19,7 @@
                     />
                 </div>
                 <div class="" v-if="title === 'Register'">
-                    <label for="email"> Email </label>
+                    <label for="email"> Email : </label>
                     <input
                         class="w-full border-2 border-black rounded-lg p-1"
                         type="email"
@@ -28,7 +28,7 @@
                     />
                 </div>
                 <div class="">
-                    <label for="password"> Password </label>
+                    <label for="password"> Password : </label>
                     <input
                         class="w-full border-2 border-black rounded-lg p-1"
                         type="password"
@@ -37,7 +37,7 @@
                     />
                 </div>
                 <div class="" v-if="title === 'Register'">
-                    <label for="password"> Confirm Password </label>
+                    <label for="password"> Confirm Password : </label>
                     <input
                         class="w-full border-2 border-black rounded-lg p-1"
                         type="password"

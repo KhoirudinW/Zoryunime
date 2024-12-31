@@ -1,26 +1,21 @@
 <script setup>
-    import { ref } from "vue";
     import ModalLogin from "./ModalLogin.vue";
     import NavItems from "./NavItems.vue";
+    import { ref } from "vue";
 
     const status = ref("");
     const model = ref("");
     const device = ref(false);
 </script>
 <template lang="">
-    <div class="bg-slate-400 h-20 p-5 flex justify-between items-center">
+    <div class="bg-[#393E46] h-20 p-5 flex justify-between md:justify-around items-center">
         <div class="w-20">
-            <img
-                width="50px"
-                class="items-center"
-                src="../assets/logo.svg"
-                alt="logo"
-            />
+            <h1 class="text-2xl font-bold text-white"><span class="text-[#F96D00]">Zoryu</span>nime</h1>
         </div>
         <ul class="hidden md:flex gap-4 items-center">
-            <li><router-link to="/">home</router-link></li>
-            <li><router-link to="/kategori">kategori</router-link></li>
-            <li><router-link to="/list">list</router-link></li>
+            <li><router-link to="/" class="font-bold text-white transition-all duration-150 ease-in-out py-1" :class="{ 'text-[#F96D00] border-b-2': $route.path === '/' }">Home</router-link></li>
+            <li><router-link to="/kategori" class="font-bold text-white transition-all duration-150 ease-in-out py-1" :class="{ 'text-[#F96D00] border-b-2': $route.path === '/kategori' }">Kategori</router-link></li>
+            <li><router-link to="/list" class="font-bold text-white transition-all duration-150 ease-in-out py-1" :class="{ 'text-[#F96D00] border-b-2': $route.path === '/list' }">List</router-link></li>
         </ul>
         <ul
             class="hidden md:flex gap-4 w-44 items-center"
@@ -97,4 +92,5 @@
             :title="model"
         />
     </div>
+    <div class="bg-[#F96D00] w-full h-1"></div>
 </template>
