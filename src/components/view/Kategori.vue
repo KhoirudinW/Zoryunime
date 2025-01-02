@@ -4,7 +4,7 @@
     <div class="w-full my-2 h-1 bg-[#F96D00]"></div>
     <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
       <li v-for="category in categories" :key="category.mal_id" class="py-2 px-2 hover:bg-[#2f333a] transition duration-300">
-        <router-link :to="'/kategori/' + category.mal_id" class="text-lg font-medium text-white hover:text-gray-900"><button class="w-full">{{ category.name }}</button></router-link>
+        <router-link :to="'/kategori/' + category.mal_id" class="text-lg font-medium text-white hover:text-[#F96D00]"><button class="w-full">{{ category.name }}</button></router-link>
       </li>
     </ul>
   </div>

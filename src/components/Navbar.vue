@@ -12,10 +12,10 @@
         <div class="w-20">
             <h1 class="text-2xl font-bold text-white"><span class="text-[#F96D00]">Zoryu</span>nime</h1>
         </div>
-        <ul class="hidden md:flex gap-4 items-center">
-            <li><router-link to="/" class="font-bold text-white transition-all duration-150 ease-in-out py-1" :class="{ 'text-[#F96D00] border-b-2': $route.path === '/' }">Home</router-link></li>
-            <li><router-link to="/kategori" class="font-bold text-white transition-all duration-150 ease-in-out py-1" :class="{ 'text-[#F96D00] border-b-2': $route.path === '/kategori' }">Kategori</router-link></li>
-            <li><router-link to="/list" class="font-bold text-white transition-all duration-150 ease-in-out py-1" :class="{ 'text-[#F96D00] border-b-2': $route.path === '/list' }">List</router-link></li>
+        <ul class="hidden md:flex gap-4 items-center text-white">
+            <li><router-link to="/" class="font-bold transition-all duration-150 ease-in-out py-1 hover:text-[#F96D00]" :class="{ ' border-b-2': $route.path === '/' }">Home</router-link></li>
+            <li><router-link to="/kategori" class="font-bold transition-all duration-150 ease-in-out py-1 hover:text-[#F96D00]" :class="{ 'text-[#F96D00] border-b-2': $route.path === '/kategori' }">Kategori</router-link></li>
+            <li><router-link to="/list" class="font-bold transition-all duration-150 ease-in-out py-1 hover:text-[#F96D00]" :class="{ 'text-[#F96D00] border-b-2': $route.path === '/list' }">List</router-link></li>
         </ul>
         <ul
             class="hidden md:flex gap-4 w-44 items-center"
