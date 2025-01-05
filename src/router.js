@@ -2,15 +2,22 @@ import { createWebHistory , createRouter } from 'vue-router'
 
 import Hero from './components/view/Hero.vue'
 import Kategori from './components/view/Kategori.vue'
-import List from './components/view/List.vue'
 import KategoriPage from './components/view/KategoriPage.vue'
+import KategoriMusim from './components/view/KategoriMusim.vue'
+import KategoriPageMusim from './components/view/KategoriPageMusim.vue'
+// import KategoriPageMusimLainnya from './components/view/KategoriPageMusimLainnya.vue'
+import Search from './components/view/Search.vue'
 
 const routes = [
   { path: '/', component: Hero },
-  { path: '/kategori', component: Kategori },
-  { path: '/kategori/:id', component: KategoriPage },
-  { path: '/list', component: List },
-  { path: '/detail', component: List },
+  { path: '/kategori/top', component: KategoriPage },
+  { path: '/kategori/genre', component: Kategori },
+  { path: '/kategori/genre/:id', component: KategoriPage },
+  { path: '/kategori/season', component: KategoriMusim },
+  { path: '/kategori/season/:year', component: KategoriPageMusim },
+  { path: '/kategori/season/:year/:season', component: KategoriPageMusim },
+  { path: '/Search', component: Search },
+  { path: '/detail', component: KategoriPage },
 ]
 
 const router = createRouter({

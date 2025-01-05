@@ -42,13 +42,13 @@
             </p>
             <div class="flex flex-col md:flex-row md:justify-center gap-4">
                 <router-link
-                    to="/list"
+                    to="/search"
                     class="bg-[#F96D00] px-6 py-3 rounded-md text-base md:text-lg font-bold hover:bg-[#f9851a] transition"
                 >
-                    Browse List
+                    Search anime
                 </router-link>
                 <router-link
-                    to="/kategori"
+                    to="/kategori/genre"
                     class="bg-white text-[#393E46] px-6 py-3 rounded-md text-base md:text-lg font-bold hover:bg-gray-300 transition"
                 >
                     Explore Categories

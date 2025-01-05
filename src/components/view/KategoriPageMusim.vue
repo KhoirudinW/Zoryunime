@@ -15,67 +15,68 @@ const nsfw = ref(true);
 // Route params
 const route = useRoute();
 
-const dataAnimeByCategory = async (categoryId) => {
+const dataAnimeByCategory = async (year, season) => {
     try {
-        let animeResponse;
-        let genreResponse;
+        let response;
 
-        if (route.path.startsWith('/kategori/genre')) {
-            [animeResponse, genreResponse] = await axios.all([
-                axios.get('https://api.jikan.moe/v4/anime', {
-                    params: {
-                        genres: categoryId,
-                        page: currentPage.value,
-                        limit: 25,
-                        sfw: nsfw.value
-                    }
-                }),
-                axios.get('https://api.jikan.moe/v4/genres/anime')
-            ]);
-            namaKategori.value = genreResponse.data.data.find(g => g.mal_id == categoryId).name;
-        } else {
-            animeResponse = await axios.get('https://api.jikan.moe/v4/top/anime', {
+        if (year === 'now') {
+            response = await axios.get('https://api.jikan.moe/v4/seasons/now', {
                 params: {
                     page: currentPage.value,
                     limit: 25,
                     sfw: nsfw.value
                 }
             });
-            namaKategori.value = 'Top Anime';
+        } else if (year === 'upcoming') {
+            response = await axios.get('https://api.jikan.moe/v4/seasons/upcoming', {
+                params: {
+                    page: currentPage.value,
+                    limit: 25,
+                    sfw: nsfw.value
+                }
+            });
+        } else {
+            response = await axios.get(`https://api.jikan.moe/v4/seasons/${year}/${season}`, {
+                params: {
+                    page: currentPage.value,
+                    limit: 25,
+                    sfw: nsfw.value
+                }
+            });
         }
 
-        animeList.value = animeResponse.data.data;
-        totalPage.value = Math.ceil(animeResponse.data.pagination.items.total / 25);
+        animeList.value = response.data.data;
+        namaKategori.value = year;
+        totalPage.value = Math.ceil(response.data.pagination.items.total / 25);
     } catch (error) {
-        console.log(error);
+        console.error("Error fetching data:", error);
     }
 };
 
 onMounted(() => {
-    dataAnimeByCategory(route.params.id);
+    dataAnimeByCategory(route.params.year, route.params.season);
 });
 
-watch(() => route.params.id, (newId) => {
-    currentPage.value = 1;
-    dataAnimeByCategory(newId);
+watch(() => [route.params.year, route.params.season], ([newYear, newSeason]) => {
+    dataAnimeByCategory(newYear, newSeason);
 });
 
 const changePage = (page) => {
     if (page > 0 && page <= totalPage.value) {
         currentPage.value = page;
-        dataAnimeByCategory(route.params.id);
+        dataAnimeByCategory(route.params.year, route.params.season);
     }
 };
 
 const changeNsfw = () => {
     nsfw.value = !nsfw.value;
-    dataAnimeByCategory(route.params.id);
+    dataAnimeByCategory(route.params.year, route.params.season);    
 };
 
 </script>
 
 <template>
-    <breadCrumb :tittle="' / ' + namaKategori" :before="'Kategori'" :link="'/kategori/genre'" @nsfw="changeNsfw"/>
+    <breadCrumb :tittle="route.params.season ? ' / ' + route.params.year + ' / ' + route.params.season : ' / ' + route.params.year" :before="'Kategori'" :link="'/kategori/season'" @nsfw="changeNsfw"/>
     <div class="lg:w-[70%] md:w-[85%] w-[90%] grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-4 my-3 bg-[#393E46] p-4 mx-auto rounded-md place-items-center">
         <Card v-for="a in animeList" :key="a.mal_id" :anime="a"/>
     </div>

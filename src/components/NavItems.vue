@@ -4,7 +4,7 @@
 <template lang="">
 
     <ul
-        class="absolute md:hidden left-0 top-20 bg-[#393E46] text-white p-2 w-full flex flex-col gap-1"
+        class="absolute md:hidden left-0 top-20 bg-[#393E46] text-white p-2 w-full flex flex-col gap-1 z-50"
     >
     <div class="w-full h-1 bg-[#F96D00] my-2"></div>
         <li class="border-2 p-1 rounded-md transition-all duration-150 ease-in-out" :class="{ 'border-[#F96D00] text-[#F96D00]': $route.path === '/' }">
@@ -12,16 +12,23 @@
                 ><button class="text-left p-1 px-2 w-full font-bold">home</button></router-link
             >
         </li>
-        <li class="border-2 p-1 rounded-md transition-all duration-150 ease-in-out" :class="{ 'border-[#F96D00] text-[#F96D00]': $route.path === '/kategori' }">
-            <router-link to="/kategori"
+        <li class="border-2 p-1 rounded-md transition-all duration-150 ease-in-out" :class="{ 'border-[#F96D00] text-[#F96D00]': $route.path === '/kategori/genre' }">
+            <router-link to="/kategori/genre"
                 ><button class="text-left p-1 px-2 w-full font-bold">
-                    kategori
+                    kategori genre
                 </button></router-link
             >
         </li>
-        <li class="border-2 p-1 rounded-md transition-all duration-150 ease-in-out" :class="{ 'border-[#F96D00] text-[#F96D00]': $route.path === '/list' }">
-            <router-link to="/list"
-                ><button class="text-left p-1 px-2 w-full font-bold">List</button></router-link
+        <li class="border-2 p-1 rounded-md transition-all duration-150 ease-in-out" :class="{ 'border-[#F96D00] text-[#F96D00]': $route.path === '/kategori/season' }">
+            <router-link to="/kategori/season"
+                ><button class="text-left p-1 px-2 w-full font-bold">
+                    kategori musim
+                </button></router-link
+            >
+        </li>
+        <li class="border-2 p-1 rounded-md transition-all duration-150 ease-in-out" :class="{ 'border-[#F96D00] text-[#F96D00]': $route.path === '/search' }">
+            <router-link to="/search"
+                ><button class="text-left p-1 px-2 w-full font-bold">Search</button></router-link
             >
         </li>
         <li class="p-1">
