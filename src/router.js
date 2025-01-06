@@ -5,7 +5,7 @@ import Kategori from './components/view/Kategori.vue'
 import KategoriPage from './components/view/KategoriPage.vue'
 import KategoriMusim from './components/view/KategoriMusim.vue'
 import KategoriPageMusim from './components/view/KategoriPageMusim.vue'
-// import KategoriPageMusimLainnya from './components/view/KategoriPageMusimLainnya.vue'
+import Detail from './components/view/DetailedAnime.vue'
 import Search from './components/view/Search.vue'
 
 const routes = [
@@ -17,7 +17,7 @@ const routes = [
   { path: '/kategori/season/:year', component: KategoriPageMusim },
   { path: '/kategori/season/:year/:season', component: KategoriPageMusim },
   { path: '/Search', component: Search },
-  { path: '/detail', component: KategoriPage },
+  { path: '/anime/:id', component: Detail },
 ]
 
 const router = createRouter({

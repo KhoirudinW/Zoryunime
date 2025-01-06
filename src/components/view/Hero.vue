@@ -51,7 +51,7 @@
                     to="/kategori/genre"
                     class="bg-white text-[#393E46] px-6 py-3 rounded-md text-base md:text-lg font-bold hover:bg-gray-300 transition"
                 >
-                    Explore Categories
+                    Explore Categories  
                 </router-link>
             </div>
         </div>
