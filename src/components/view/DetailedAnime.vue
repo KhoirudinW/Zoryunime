@@ -81,9 +81,9 @@ const refresh = () => {
           <h1 class="text-3xl font-bold mb-2">{{ animeDetail.title }}</h1>
           <p class="mb-4">{{ animeDetail.synopsis }}</p>
           <div class="flex flex-col md:flex-row justify-between">
-            <span class="font-bold">Episodes: <span class="bg-[#F96D00] px-2 py-1 rounded-md">{{ animeDetail.episodes }}</span></span>
-            <span class="font-bold">Status: <span class="bg-[#18bb21] px-2 py-1 rounded-md">{{ animeDetail.status }}</span></span>
-            <span class="font-bold">Rating: <span class="bg-[#c4b91e] px-2 py-1 rounded-md">{{ animeDetail.score }}</span></span>
+            <span class="font-bold my-2">Episodes: <span class="bg-[#F96D00] px-2 py-1 rounded-md">{{ animeDetail.episodes }}</span></span>
+            <span class="font-bold my-2">Status: <span class="bg-[#18bb21] px-2 py-1 rounded-md">{{ animeDetail.status }}</span></span>
+            <span class="font-bold my-2">Rating: <span class="bg-[#c4b91e] px-2 py-1 rounded-md">{{ animeDetail.score }}</span></span>
           </div>
           <div class="mt-4">
             <h2 class="text-2xl font-bold">Genres:</h2>
@@ -133,7 +133,7 @@ const refresh = () => {
 
     <div v-if="reviews.length > 0" class="mt-8">
       <h2 class="text-2xl font-bold mb-2">Reviews</h2>
-      <div :class=" seeMoreComment ? 'h-[100%]' : 'h-[560px]'" class="w-full h-[560px] overflow-hidden">
+      <div :class=" seeMoreComment ? 'h-auto' : 'h-[560px]'" class="w-full h-[560px] overflow-hidden">
         <div class="grid grid-cols-1 gap-4">
           <div v-for="review in reviews" :key="review.mal_id" class="bg-gray-800 p-4 rounded-md">
             <h3 class="font-bold">{{ review.user.username }}</h3>
