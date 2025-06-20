@@ -2,12 +2,15 @@
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
+import Card from "../CardComp.vue";
 
 const animeDetail = ref(null);
 const videos = ref([]);
 const characters = ref([]);
 const recommendations = ref([]);
 const reviews = ref([]);
+const seeMoreChar = ref(false);
+const seeMoreComment = ref(false);
 const route = useRoute();
 
 onMounted(async () => {
@@ -22,17 +25,28 @@ onMounted(async () => {
     ]);
     animeDetail.value = animeDetailRes.data.data;
     videos.value = videosRes.data.data.promo;
-    characters.value = charactersRes.data.data.slice(0, 14);
+    characters.value = charactersRes.data.data;
     recommendations.value = recommendationsRes.data.data.slice(0, 14);
     reviews.value = reviewsRes.data.data.map(review => ({ ...review, isExpanded: false }));
-    console.log(reviews.value);
+    // console.log(reviews.value);
   } catch (error) {
     console.log(error);
   }
+
+
 });
 
 const toggleReadMore = (review) => {
   review.isExpanded = !review.isExpanded;
+};
+
+const toggleSeeMoreChar = () => {
+  seeMoreChar.value = !seeMoreChar.value;
+};
+
+const toggleSeeMoreComment = () => {
+  seeMoreComment.value = !seeMoreComment.value;
+  console.log(seeMoreComment.value);
 };
 </script>
 
@@ -44,14 +58,18 @@ const toggleReadMore = (review) => {
           <h1 class="text-3xl font-bold mb-2">{{ animeDetail.title }}</h1>
           <p class="mb-4">{{ animeDetail.synopsis }}</p>
           <div class="flex flex-col md:flex-row justify-between">
-            <span class="font-bold">Episodes: {{ animeDetail.episodes }}</span>
-            <span class="font-bold">Status: {{ animeDetail.status }}</span>
-            <span class="font-bold">Rating: {{ animeDetail.score }}</span>
+            <span class="font-bold">Episodes: <span class="bg-[#F96D00] px-2 py-1 rounded-md">{{ animeDetail.episodes }}</span></span>
+            <span class="font-bold">Status: <span class="bg-[#18bb21] px-2 py-1 rounded-md">{{ animeDetail.status }}</span></span>
+            <span class="font-bold">Rating: <span class="bg-[#c4b91e] px-2 py-1 rounded-md">{{ animeDetail.score }}</span></span>
           </div>
           <div class="mt-4">
             <h2 class="text-2xl font-bold">Genres:</h2>
-            <ul class="list-disc list-inside">
-              <li v-for="genre in animeDetail.genres" :key="genre.mal_id">{{ genre.name }}</li>
+            <ul class="">
+              <li v-for="genre in animeDetail.genres" :key="genre.mal_id" class="my-3 mx-2">
+                <router-link :to="`/kategori/genre/${genre.mal_id}`" class="bg-blue-500 text-white px-2 py-1 rounded-md min-w-10 max-w-[100%]">
+                  {{ genre.name }}
+                </router-link>
+              </li>
             </ul>
           </div>
       </div>
@@ -69,41 +87,41 @@ const toggleReadMore = (review) => {
 
     <div v-if="characters.length > 0" class="mt-8">
       <h2 class="text-2xl font-bold mb-2">Characters</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div v-for="character in characters" :key="character.mal_id" class="flex items-center">
-          <img :src="character.character.images.jpg.image_url" alt="character image" class="w-16 h-16 rounded-full mr-4">
-          <div>
-            <h3 class="font-bold text-clip ">{{ character.character.name }}</h3>
-            <p>{{ character.role }}</p>
+      <div :class=" seeMoreChar ? 'h-auto' : 'h-[400px]'" class="w-full h-[400px] overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div v-for="character in characters" :key="character.mal_id" class="flex items-center">
+            <img :src="character.character.images.jpg.image_url" alt="character image" class="w-16 h-16 rounded-full mr-4">
+            <div>
+              <h3 class="font-bold text-clip ">{{ character.character.name }}</h3>
+              <p>{{ character.role }}</p>
+            </div>
           </div>
         </div>
       </div>
+      <button class="bg-yellow-500 font-bold py-1 px-2 rounded-md mt-5" @click="toggleSeeMoreChar()">{{ seeMoreChar ? 'See Less' : 'See More' }}</button>
     </div>
 
     <div v-if="recommendations.length > 0" class="mt-8">
       <h2 class="text-2xl font-bold mb-2">Recommendations</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div v-for="recommendation in recommendations" :key="recommendation.mal_id" class="flex items-center">
-          <img :src="recommendation.entry.images.jpg.image_url" alt="recommendation image" class="w-16 h-16 object-contain rounded-md mr-4">
-          <div class="w-[80%] flex flex-row justify-between">
-            <h3 class="font-bold">{{ recommendation.entry.title }}</h3>
-            <a href="" class="bg-yellow-500 font-bold py-1 px-2 rounded-md">See More</a>
-          </div>
-        </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 w-[100%] gap-4">
+        <Card v-for="recommendation in recommendations" :key="recommendation.mal_id" :anime="recommendation.entry"/>
       </div>
     </div>
 
     <div v-if="reviews.length > 0" class="mt-8">
       <h2 class="text-2xl font-bold mb-2">Reviews</h2>
-      <div class="grid grid-cols-1 gap-4">
-        <div v-for="review in reviews" :key="review.mal_id" class="bg-gray-800 p-4 rounded-md">
-          <h3 class="font-bold">{{ review.user.username }}</h3>
-          {{ review.isExpanded ? review.review : review.review.slice(0, 100) + '...' }}
-            <span v-if="review.review.length > 100" class="text-blue-500 cursor-pointer" @click="toggleReadMore(review)">
-              {{ review.isExpanded ? 'Read Less' : 'Read More' }}
-            </span>
+      <div :class=" seeMoreComment ? 'h-[100%]' : 'h-[560px]'" class="w-full h-[560px] overflow-hidden">
+        <div class="grid grid-cols-1 gap-4">
+          <div v-for="review in reviews" :key="review.mal_id" class="bg-gray-800 p-4 rounded-md">
+            <h3 class="font-bold">{{ review.user.username }}</h3>
+            {{ review.isExpanded ? review.review : review.review.slice(0, 100) + '...' }}
+              <span v-if="review.review.length > 100" class="text-blue-500 cursor-pointer" @click="toggleReadMore(review)">
+                {{ review.isExpanded ? 'Read Less' : 'Read More' }}
+              </span>
+          </div>
         </div>
       </div>
+      <button class="bg-yellow-500 font-bold py-1 px-2 rounded-md mt-5" @click="toggleSeeMoreComment()">{{seeMoreComment ? 'See Less' : 'See More'}}</button>
     </div>
 
     <div v-else class="text-center">Loading...</div>

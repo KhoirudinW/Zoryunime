@@ -3,7 +3,7 @@
 </script>
 <template lang="">
     <router-link
-        :to="'/detail'"
+        :to="'/anime/' + anime.mal_id"
         class="relative w-32 h-48 bg-[#222831] overflow-hidden group/card"
     >
         <img

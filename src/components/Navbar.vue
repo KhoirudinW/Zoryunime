@@ -61,7 +61,7 @@
         <ul class="hidden md:flex gap-4 w-44 items-center" v-else>
             <li>
                 <button
-                    class="bg-green-600 px-4 py-1 rounded-md font-bold text-white"
+                    class="bg-green-600 px-4 py-1 rounded-md font-bold text-white hidden"
                     @click="model = 'Login'"
                 >
                     Login
@@ -69,7 +69,7 @@
             </li>
             <li>
                 <button
-                    class="bg-blue-600 px-4 py-1 rounded-md font-bold text-white"
+                    class="bg-blue-600 px-4 py-1 rounded-md font-bold text-white hidden"
                     @click="model = 'Register'"
                 >
                     Register
