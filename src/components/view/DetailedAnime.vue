@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
 import Card from "../CardComp.vue";
@@ -13,8 +13,8 @@ const seeMoreChar = ref(false);
 const seeMoreComment = ref(false);
 const route = useRoute();
 
-onMounted(async () => {
-  const animeId = route.params.id;
+const fetchDetailedAnime = async (animeId) => {
+  // const animeId = route.params.id;
   try {
     const animeDetailRes = await axios.get(`https://api.jikan.moe/v4/anime/${animeId}`);
     animeDetail.value = animeDetailRes.data.data;
@@ -40,8 +40,20 @@ onMounted(async () => {
   } catch (error) {
     console.log(error);
   }
+}
 
+watch(() => route.params.id, async (newId, oldId) => {
+  if (newId !== oldId) {
+    videos.value = [];
+    characters.value = [];
+    recommendations.value = [];
+    reviews.value = [];
+    await fetchDetailedAnime(newId);
+  }
+});
 
+onMounted(()=>{
+  fetchDetailedAnime(route.params.id);
 });
 
 const toggleReadMore = (review) => {
@@ -55,13 +67,17 @@ const toggleSeeMoreChar = () => {
 const toggleSeeMoreComment = () => {
   seeMoreComment.value = !seeMoreComment.value;
 };
+
+const refresh = () => {
+
+}
 </script>
 
 <template>
   <div class="text-white bg-[#393E46] lg:w-[70%] md:w-[85%] w-[90%] mx-auto p-4 mt-20 mb-2 rounded-md">
-    <div v-if="animeDetail" class="p-4 flex flex-col md:flex-row">
-      <img :src="animeDetail.images.jpg.large_image_url" alt="anime image" class="rounded-md object-contain mx-auto mb-4 md:mb-0 md:mr-4 md:w-1/3">
-      <div class="m-4">
+    <div v-if="animeDetail" class="p-4 flex flex-col  md:flex-row ">
+      <img :src="animeDetail.images.jpg.large_image_url" alt="anime image" class="rounded-md  object-cover mx-auto mb-4 md:mb-0 md:mr-4 md:w-1/3">
+      <div class="m-4 w-[100%]">
           <h1 class="text-3xl font-bold mb-2">{{ animeDetail.title }}</h1>
           <p class="mb-4">{{ animeDetail.synopsis }}</p>
           <div class="flex flex-col md:flex-row justify-between">
@@ -111,7 +127,7 @@ const toggleSeeMoreComment = () => {
     <div v-if="recommendations.length > 0" class="mt-8">
       <h2 class="text-2xl font-bold mb-2">Recommendations</h2>
       <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 w-[100%] gap-4">
-        <Card v-for="recommendation in recommendations" :key="recommendation.mal_id" :anime="recommendation.entry"/>
+        <Card v-for="recommendation in recommendations" :key="recommendation.mal_id" :anime="recommendation.entry" @click="refresh()"/>
       </div>
     </div>
 
