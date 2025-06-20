@@ -16,19 +16,27 @@ const route = useRoute();
 onMounted(async () => {
   const animeId = route.params.id;
   try {
-    const [animeDetailRes, videosRes, charactersRes, recommendationsRes, reviewsRes] = await axios.all([
-        axios.get(`https://api.jikan.moe/v4/anime/${animeId}`),
-        axios.get(`https://api.jikan.moe/v4/anime/${animeId}/videos`),
-        axios.get(`https://api.jikan.moe/v4/anime/${animeId}/characters`),
-        axios.get(`https://api.jikan.moe/v4/anime/${animeId}/recommendations`),
-        axios.get(`https://api.jikan.moe/v4/anime/${animeId}/reviews`),
-    ]);
+    const animeDetailRes = await axios.get(`https://api.jikan.moe/v4/anime/${animeId}`);
     animeDetail.value = animeDetailRes.data.data;
+
+    // Tambahkan delay kecil antar permintaan
+    const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+    await delay(500);
+    const videosRes = await axios.get(`https://api.jikan.moe/v4/anime/${animeId}/videos`);
     videos.value = videosRes.data.data.promo;
+
+    await delay(500);
+    const charactersRes = await axios.get(`https://api.jikan.moe/v4/anime/${animeId}/characters`);
     characters.value = charactersRes.data.data;
+
+    await delay(500);
+    const recommendationsRes = await axios.get(`https://api.jikan.moe/v4/anime/${animeId}/recommendations`);
     recommendations.value = recommendationsRes.data.data.slice(0, 14);
+
+    await delay(500);
+    const reviewsRes = await axios.get(`https://api.jikan.moe/v4/anime/${animeId}/reviews`);
     reviews.value = reviewsRes.data.data.map(review => ({ ...review, isExpanded: false }));
-    // console.log(reviews.value);
   } catch (error) {
     console.log(error);
   }
@@ -46,7 +54,6 @@ const toggleSeeMoreChar = () => {
 
 const toggleSeeMoreComment = () => {
   seeMoreComment.value = !seeMoreComment.value;
-  console.log(seeMoreComment.value);
 };
 </script>
 
