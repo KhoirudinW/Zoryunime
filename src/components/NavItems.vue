@@ -31,7 +31,7 @@
                 ><button class="text-left p-1 px-2 w-full font-bold">Search</button></router-link
             >
         </li>
-        <li class="p-1">
+        <li class="p-1 hidden">
             <ul
                 class="flex h-16 gap-4 w-48 items-center float-end"
                 v-if="status === 'login'"
