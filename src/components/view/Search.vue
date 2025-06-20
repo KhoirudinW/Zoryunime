@@ -63,8 +63,8 @@ const changeNsfw = () => {
     searchAnime();
 }
 </script>
-<template lang="">
-    <div class="text-white bg-[#393E46] lg:w-[70%] md:w-[85%] w-[90%] mx-auto p-4 mt-20 mb-2 rounded-md">
+<template class="" lang="">
+    <div class="text-white  bg-[#393E46] lg:w-[70%] md:w-[85%] w-[90%] mx-auto p-4 mt-20 mb-2 rounded-md">
         <div class="mx-auto flex lg:w-[40%] md:w-[60%] my-2 relative">
             <input v-model="searchQuery" type="search" @input="searchAnime" class="w-full py-2 pl-8 pr-2 rounded-md bg-slate-800 border-[#F96D00] border-2 focus:outline-none" placeholder="Search">
             <svg class="absolute top-[0.60rem] left-2 w-6 h-6 text-[#F96D00] " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="search"><g class="fill-current"><path d="m20.71 19.29-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z"></path></g></svg>
