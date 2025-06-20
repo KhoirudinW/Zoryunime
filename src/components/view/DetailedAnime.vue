@@ -81,9 +81,9 @@ const refresh = () => {
           <h1 class="text-3xl font-bold mb-2">{{ animeDetail.title }}</h1>
           <p class="mb-4">{{ animeDetail.synopsis }}</p>
           <div class="flex flex-col md:flex-row justify-between">
-            <span class="font-bold my-2">Episodes: <span class="bg-[#F96D00] px-2 py-1 rounded-md">{{ animeDetail.episodes }}</span></span>
-            <span class="font-bold my-2">Status: <span class="bg-[#18bb21] px-2 py-1 rounded-md">{{ animeDetail.status }}</span></span>
-            <span class="font-bold my-2">Rating: <span class="bg-[#c4b91e] px-2 py-1 rounded-md">{{ animeDetail.score }}</span></span>
+            <span class="font-bold my-2">Episodes: <span class="bg-[#F96D00] px-2 py-1 rounded-md">{{ animeDetail.episodes ?? 'N/A' }}</span></span>
+            <span class="font-bold my-2">Status: <span class="bg-[#18bb21] px-2 py-1 rounded-md">{{ animeDetail.status ?? 'N/A' }}</span></span>
+            <span class="font-bold my-2">Rating: <span class="bg-[#c4b91e] px-2 py-1 rounded-md">{{ animeDetail.score ?? 'N/A' }}</span></span>
           </div>
           <div class="mt-4">
             <h2 class="text-2xl font-bold">Genres:</h2>

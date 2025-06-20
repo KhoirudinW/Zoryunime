@@ -5,7 +5,7 @@
 </script>
 <template class="border">
     <Navbar class="text-white" />
-    <div class="min-h-[100vh]">
+    <div class="min-h-[70vh]">
         <router-view />
     </div>
     <Footer class="text-white" />

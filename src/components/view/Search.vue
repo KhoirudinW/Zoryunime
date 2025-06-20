@@ -21,7 +21,6 @@ const searchResult = ref([]);
 const searching = ref(false);
 const searchQuery = ref("");
 
-console.log(nsfw.value);
 
 onMounted(async () => {
     try {
